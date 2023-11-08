@@ -12,7 +12,7 @@ class MiInterfaz(tk.Frame):
         self.canvas_fondo.place(x=-10, y=90)
         self.canvas_fondo.configure(bg="white")
         # Crea los botones para seleccionar la carrera.
-        self.boton1 = tk.Button(self.canvas_fondo, text="Ing. Electronica", font=("Noto Serif", 14), fg='white', bg='#004AAD', command=lambda: self.open_new_window("Ing. Electrónica"))
+        self.boton1 = tk.Button(self.canvas_fondo, text="Ing. Electrónica", font=("Noto Serif", 14), fg='white', bg='#004AAD', command=lambda: self.open_new_window("Ing. Electrónica"))
         self.boton1.configure(width=17, height=2)
         self.boton2 = tk.Button(self.canvas_fondo, text="Ing. Computación", font=("Noto Serif", 14), fg='white', bg="#004AAD", command=lambda: self.open_new_window("Ing. en Computación"))
         self.boton2.configure(width=17, height=2)
@@ -31,40 +31,41 @@ class MiInterfaz(tk.Frame):
         ventana.destroy()
         self.ventana.deiconify()
     def open_new_window(self, program):
+        # Cargar los datos del archivo JSON
+        with open('program_data.json', 'r', encoding='utf-8') as json_file:
+            datos_carreras = json.load(json_file)
+
         new_window = tk.Toplevel(self.ventana)
         new_window.title(program)
         new_window.protocol("WM_DELETE_WINDOW", lambda: self.on_closing(new_window))
-        with open('program_data.json', 'r', encoding='utf-8') as file:
-            data = json.load(file)
-        if program == "Ing. en Computación":
-            program = "Ingeniería en Computación"
-        if program == "Ing. Electrónica":
-            program = "Ingeniería Electrónica"
-        if program in data:
-            cursos = data[program]
-            self.mostrar_plan_de_estudios(new_window, cursos)
-        else:
-            cursos = data["Ingeniería en Computación"]
-            self.mostrar_plan_de_estudios(new_window, cursos)
-    def mostrar_plan_de_estudios(self, window, cursos):
-        canvas = tk.Canvas(window)
-        canvas.pack(side="top", fill="both", expand=True)
-        scrollbar = tk.Scrollbar(window, orient="horizontal", command=canvas.xview)
-        scrollbar.pack(side="bottom", fill="x")
-        canvas.configure(xscrollcommand=scrollbar.set)
-        interior = tk.Frame(canvas)
-        canvas.create_window((0, 0), window=interior, anchor="nw")
-        for bloque, cursos_bloque in cursos.items():
-            bloque_frame = tk.Frame(interior)
-            bloque_frame.pack(side="left", padx=10)
-            label_bloque = tk.Label(bloque_frame, text=f"{bloque}:")
-            label_bloque.pack()
-            for curso in cursos_bloque:
-                curso_button = tk.Button(bloque_frame, text=curso, command=lambda c=curso: self.mostrar_informacion_curso(c))
-                curso_button.pack()
 
-        interior.update_idletasks()
-        canvas.config(scrollregion=canvas.bbox("all"))
+        # Crear una lista de control de variables para los cursos
+        curso_vars = []
+        
+        # Crear una función para actualizar el nivel de dificultad
+        def actualizar_nivel_dificultad():
+            total_creditos = 0
+            nivel_dificultad = 0
+            cantidad_cursos = 0  # Contador de cursos seleccionados
+            for i, curso_var in enumerate(curso_vars):
+                if curso_var.get() == 1:
+                    curso = datos_carreras[program]['cursos'][i]
+                    total_creditos += curso['creditos']
+                    nivel_dificultad += curso['creditos'] * curso['nivel_dificultad']
+                    cantidad_cursos += 1
+            
+            nivel_semestre = (nivel_dificultad / total_creditos) * cantidad_cursos if total_creditos > 0 else 0
+            nivel_dificultad_label.config(text=f"Nivel de Dificultad del Semestre: {nivel_semestre:.2f}")
+
+        # Crear checkboxes para seleccionar cursos
+        for i, curso in enumerate(datos_carreras[program]['cursos']):
+            curso_var = tk.IntVar(value=0)
+            curso_vars.append(curso_var)
+            curso_checkbox = tk.Checkbutton(new_window, text=curso['nombre'], variable=curso_var, command=actualizar_nivel_dificultad)
+            curso_checkbox.grid(row=i, column=0, sticky='w')
+        
+        nivel_dificultad_label = tk.Label(new_window, text="Nivel de Dificultad del Semestre: 0.00")
+        nivel_dificultad_label.grid(row=len(datos_carreras[program]['cursos']), column=0, columnspan=2)
 
 ventana = tk.Tk()
 ventana.geometry('900x550')
