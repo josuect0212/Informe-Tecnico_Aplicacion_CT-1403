@@ -5,7 +5,6 @@ class MiInterfaz(tk.Frame):
         # Crea la ventana principal
         self.ventana = ventana
         self.ventana.title("CalculaTEC")
-
         # Crea al canvas de fondo
         self.canvas_fondo = tk.Canvas(self.ventana, bg='white', bd=2, highlightthickness=2, highlightbackground='white', width=10000, height=2000)
         self.canvas_fondo.pack(fill='both', expand=True)
@@ -37,7 +36,20 @@ class MiInterfaz(tk.Frame):
 
         new_window = tk.Toplevel(self.ventana)
         new_window.title(program)
+        new_window.geometry('900x550')
+
         new_window.protocol("WM_DELETE_WINDOW", lambda: self.on_closing(new_window))
+
+        # Crea al canvas de fondo
+        self.canvas_fondo = tk.Canvas(new_window, bg='white', bd=2, highlightthickness=2, highlightbackground='white', width=10000, height=2000)
+        self.canvas_fondo.pack(fill='both', expand=True)
+        self.canvas_fondo.place(x=-10, y=90)
+        self.canvas_fondo.configure(bg="white")
+        # Crea el canvas superior
+        self.canvas = tk.Canvas(new_window, bg='#004AAD', bd=2, highlightthickness=2, highlightbackground="#004AAD", width=10000, height=130)
+        self.canvas.pack(fill='both', expand=True)
+        self.canvas.place(x=0, y=0)  # Cambia las coordenadas x e y según tus necesidades
+        self.canvas.configure(bg='#004AAD')
 
         # Crear una lista de control de variables para los cursos
         curso_vars = []
@@ -56,16 +68,20 @@ class MiInterfaz(tk.Frame):
             
             nivel_semestre = (nivel_dificultad / total_creditos) * cantidad_cursos if total_creditos > 0 else 0
             nivel_dificultad_label.config(text=f"Nivel de Dificultad del Semestre: {nivel_semestre:.2f}")
-
+        x= 270
+        y= 120
         # Crear checkboxes para seleccionar cursos
         for i, curso in enumerate(datos_carreras[program]['cursos']):
+            y += 20
             curso_var = tk.IntVar(value=0)
             curso_vars.append(curso_var)
-            curso_checkbox = tk.Checkbutton(new_window, text=curso['nombre'], variable=curso_var, command=actualizar_nivel_dificultad)
-            curso_checkbox.grid(row=i, column=0, sticky='w')
-        
-        nivel_dificultad_label = tk.Label(new_window, text="Nivel de Dificultad del Semestre: 0.00")
-        nivel_dificultad_label.grid(row=len(datos_carreras[program]['cursos']), column=0, columnspan=2)
+            curso_checkbox = tk.Checkbutton(new_window, text=curso['nombre'], variable=curso_var, command=actualizar_nivel_dificultad, font=("telegraf", 12))
+            curso_checkbox.place(x=x, y=y)
+
+        nivel_dificultad_label = tk.Label(new_window, text="Nivel de Dificultad del Semestre: 0.00", font=("telegraf", 12)) 
+        nivel_dificultad_label.grid(row=len(datos_carreras[program]['cursos']), column=10, columnspan=80, padx=300, pady=50)
+
+
 
 ventana = tk.Tk()
 ventana.geometry('900x550')
