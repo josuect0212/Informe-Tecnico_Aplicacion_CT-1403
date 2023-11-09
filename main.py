@@ -68,6 +68,7 @@ class MiInterfaz(tk.Frame):
             
             nivel_semestre = (nivel_dificultad / total_creditos) * cantidad_cursos if total_creditos > 0 else 0
             nivel_dificultad_label.config(text=f"Nivel de Dificultad del Semestre: {nivel_semestre:.2f}")
+            cantidad_creditos_label.config(text=f"Cantidad total de créditos: {total_creditos:.2f}")
         x= 270
         y= 120
         # Crear checkboxes para seleccionar cursos
@@ -79,8 +80,10 @@ class MiInterfaz(tk.Frame):
             curso_checkbox.place(x=x, y=y)
 
         nivel_dificultad_label = tk.Label(new_window, text="Nivel de Dificultad del Semestre: 0.00", font=("telegraf", 12)) 
-        nivel_dificultad_label.grid(row=len(datos_carreras[program]['cursos']), column=10, columnspan=80, padx=300, pady=50)
+        nivel_dificultad_label.grid(row=len(datos_carreras[program]['cursos']), column=10, columnspan=80, padx=300, pady=20)
 
+        cantidad_creditos_label = tk.Label(new_window, text="Cantidad total de créditos: 0.00", font=("telegraf", 12))
+        cantidad_creditos_label.grid(row=len(datos_carreras[program]['cursos'])+1, column=10, columnspan=80, padx=300, pady=30)
 
 
 ventana = tk.Tk()
