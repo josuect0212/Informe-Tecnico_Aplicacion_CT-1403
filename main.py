@@ -67,7 +67,13 @@ class MiInterfaz(tk.Frame):
                     cantidad_cursos += 1
             
             nivel_semestre = (nivel_dificultad / total_creditos) * cantidad_cursos if total_creditos > 0 else 0
-            nivel_dificultad_label.config(text=f"Nivel de Dificultad del Semestre: {nivel_semestre:.2f}")
+            if nivel_semestre < 10.5:
+                dificultad = "Dificultad baja"
+            elif 10.5 <= nivel_semestre < 16.5:
+                dificultad = "Dificultad moderada"
+            else:
+                dificultad = "Dificultad alta"
+            nivel_dificultad_label.config(text=f"Nivel de Dificultad del Semestre: {dificultad}")
             cantidad_creditos_label.config(text=f"Cantidad total de créditos: {total_creditos:.2f}")
         x= 270
         y= 120
