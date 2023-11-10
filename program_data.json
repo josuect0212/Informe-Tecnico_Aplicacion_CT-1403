@@ -56,53 +56,53 @@
   "Ing. en Computación": {
     "cursos": [
       {
-        "nombre": "CI0202 - INGLÉS BÁSICO",
+        "nombre": "CI1106 - COMUNICACIÓN ESCRITA",
         "nivel_dificultad": 2,
         "creditos": 2
       },
       {
-        "nombre": "MA0101 - MATEMÁTICA GENERAL",
+        "nombre": "IC1400 - FUNDAMENTOS DE ORGANIZACIÓN DE COMPUTADORAS",
+        "nivel_dificultad": 2,
+        "creditos": 3
+      },
+      {
+        "nombre": "IC1802 - INTRODUCCIÓN A LA PROGRAMACIÓN",
+        "nivel_dificultad": 3,
+        "creditos": 3
+      },
+      {
+        "nombre": "MA1403 - MATEMÁTICA DISCRETA",
+        "nivel_dificultad": 4,
+        "creditos": 4
+      },
+      {
+        "nombre": "IC1803 - TALLER DE PROGRAMACIÓN",
+        "nivel_dificultad": 2,
+        "creditos": 3
+      },
+      {
+        "nombre": "IC3101 - ARQUITECTURA DE COMPUTADORES",
+        "nivel_dificultad": 3,
+        "creditos": 4
+      },
+      {
+        "nombre": "CI1107 - COMUNICACIÓN ORAL",
+        "nivel_dificultad": 2,
+        "creditos": 1
+      },
+      {
+        "nombre": "IC2001 - ESTRUCTURAS DE DATOS",
+        "nivel_dificultad": 4,
+        "creditos": 4
+      },
+      {
+        "nombre": "CI1230 - INGLÉS I",
         "nivel_dificultad": 2,
         "creditos": 2
       },
       {
-        "nombre": "CA2125 - ELEMENTOS DE COMPUTACIÓN",
+        "nombre": "IC2101 - PROGRAMACIÓN ORIENTADA A OBJETOS",
         "nivel_dificultad": 3,
-        "creditos": 3
-      },
-      {
-        "nombre": "CS1502 - INTRODUCCIÓN A LA TÉCNICA CIENCIA Y TECNOLOGÍA",
-        "nivel_dificultad": 1,
-        "creditos": 1
-      },
-      {
-        "nombre": "EL1100 - INTRODUCCIÓN A LA INGENIERÍA",
-        "nivel_dificultad": 1,
-        "creditos": 0
-      },
-      {
-        "nombre": "MA1102 - CÁLCULO DIFERENCIAL E INTEGRAL",
-        "nivel_dificultad": 4,
-        "creditos": 4
-      },
-      {
-        "nombre": "MI2101 - DIBUJO TÉCNICO",
-        "nivel_dificultad": 4,
-        "creditos": 4
-      },
-      {
-        "nombre": "QU1102 - LABORATORIO DE QUÍMICA BÁSICA I",
-        "nivel_dificultad": 2,
-        "creditos": 1
-      },
-      {
-        "nombre": "QU1106 - QUÍMICA BÁSICA I",
-        "nivel_dificultad": 3,
-        "creditos": 3
-      },
-      {
-        "nombre": "SO4604 - SEGURIDAD Y SALUD OCUPACIONAL",
-        "nivel_dificultad": 2,
         "creditos": 3
       }
     ]
